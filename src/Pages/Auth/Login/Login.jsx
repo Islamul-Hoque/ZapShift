@@ -2,21 +2,25 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hooks/useAuth';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
     const { register, handleSubmit, formState: {errors} } = useForm()
     const { signInUser } = useAuth()
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
+    
+
     const handleLogin = data => {
         console.log(data);
         signInUser(data.email, data.password)
             .then(res => {
                 console.log(res.user);
-                
+                // navigate(location.state?.from?.pathname || '/') 
+                navigate(location?.state || '/')
             })
-            .then(err => {
-                console.log(err);
-                
-            })
+            .catch(err => console.log(err) )
     }
 
     return (
@@ -42,10 +46,11 @@ const Login = () => {
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn btn-neutral mt-4">Login</button>
                     </fieldset>
+                    <SocialLogin/>
+                    <p className="text-gray-500 dark:text-gray-400 text-center"> Don’t have an account?<Link state={location.state}  to="/register" className="text-gradient font-medium"> Sign Up </Link></p>
                 </div>
             </div>
         </form>
-        <SocialLogin/>
         </div>
     );
 };

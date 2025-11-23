@@ -30,7 +30,7 @@ const ZapShiftNavbar = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"> {navLinks} </ul>
                 </div>
 
-                <Link to="/"> <Logo/> </Link>
+                <Logo/>
             </div>
 
             <div className="navbar-center hidden md:flex">
@@ -45,6 +45,7 @@ const ZapShiftNavbar = () => {
                         <Link to="/register" className="btn bg-primary btn-sm">Register</Link> 
                     </div>
                 }
+                <Link to='/rider' className="btn bg-primary btn-sm">Be a rider</Link>
             </div>
         </div>
     );
