@@ -1,7 +1,17 @@
 import { NavLink, Link } from 'react-router';
 import Logo from '../../../Components/Logo/Logo';
+import useAuth from '../../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const ZapShiftNavbar = () => {
+    const { user,signOutUser } = useAuth()
+
+    const handleLogOut = () => {
+        signOutUser()
+            .then(() => toast.success("You've been successfully logged out!"))
+            .catch(error => toast.error(error.code))
+    };
+
     const navLinks = <>
         <li><NavLink to="/services" className="nav-link">Services</NavLink></li>
         <li><NavLink to="/coverage" className="nav-link">Coverage</NavLink></li>
@@ -28,10 +38,13 @@ const ZapShiftNavbar = () => {
             </div>
 
             <div className="navbar-end gap-3">
-                <div className="flex items-center gap-3">
-                    <Link to="/login" className="btn btn-sm">Login</Link>
-                    <Link to="/register" className="btn bg-primary btn-sm">Register</Link>
-                </div>
+                {
+                    user ? <Link onClick={handleLogOut} className="btn bg-primary btn-sm">Log out</Link> : 
+                    <div className="flex items-center gap-3">
+                        <Link to="/login" className="btn btn-sm">Login</Link>
+                        <Link to="/register" className="btn bg-primary btn-sm">Register</Link> 
+                    </div>
+                }
             </div>
         </div>
     );

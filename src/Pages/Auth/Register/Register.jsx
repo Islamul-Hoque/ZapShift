@@ -1,11 +1,22 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import useAuth from '../../../hooks/useAuth';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
     const { register, handleSubmit, formState: {errors} } = useForm()
-
+    const { createUser } = useAuth()
     const handleRegister = (data) => {
         console.log('After Register', data);
+        createUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+                
+            })
+            .catch(err => {
+                console.log(err);
+                
+            })
     }
 
     return (
@@ -37,6 +48,7 @@ const Register = () => {
                 <button className="btn btn-neutral mt-4">Login</button>
         </fieldset>
             </form>
+            <SocialLogin/>
         </div>
     );
 };
