@@ -48,40 +48,41 @@ const Register = () => {
     }
 
     return (
-        <div>
-            <h3>Register</h3>
+        <div className='mb-8'>
+            <h2 className='font-extrabold text-[3rem]'>Create an Account</h2>
+            <p className='text-[1.1rem] my-2'>Register with ZapShift</p>
             <form onSubmit={handleSubmit(handleRegister)} >
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <div className="card-body">
+                <div className="">
+                    <div className="">
                         <fieldset className="fieldset">
 
                             {/* Name */}
                             <label className="label">Name</label>
-                            <input {...register('name', {required: true})} type="text" className="input" placeholder="Your name" />
+                            <input {...register('name', {required: true})} type="text" className="input w-full" placeholder="Your name" />
                                 {  errors.name?.type === 'required' && <p className='text-red-500'>name is required</p>  }
 
                             {/* Photo Field */}
                             <label className="label">Photo</label>
-                            <input {...register('photo', {required: true})} type="file" className="file-input" placeholder="Your photo" />
+                            <input {...register('photo', {required: true})} type="file" className="w-full file-input" placeholder="Your photo" />
                                 { errors.photo?.type === 'required' && <p className='text-red-500'>Photo is required</p> }
 
                             {/* Email */}
                             <label className="label">Email</label>
-                            <input {...register('email', {required: true})} type="email" className="input" placeholder="Email" />
+                            <input {...register('email', {required: true})} type="email" className="w-full input" placeholder="Email" />
                                 { errors.email?.type === 'required' && (<p className='text-red-500'>Email is required</p>)   }
 
                             {/* Password */}
                             <label className="label">Password</label>
-                            <input {...register('password', {required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/ })} type="password" className="input" placeholder="Password" />
+                            <input {...register('password', {required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/ })} type="password" className="input w-full" placeholder="Password" />
                                 { errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>  }
                                 { errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be 6 character or longer</p> }
                                 { errors.password?.type === 'pattern' && <p className='text-red-500'>Password must include uppercase, lowercase, number & special character</p> }
                             <div><a className="link link-hover">Forgot password?</a></div>
-                            <button className="btn btn-neutral mt-4">Register</button>
+                            <button className="btn btn-primary text-black mt-4">Register</button>
 
                         </fieldset>
+                        <p className="text-gray-500 dark:text-gray-400 text-center">Already have an account?  <Link state={location.state}  to="/login" className="text-primary font-medium hover:link" >  Login </Link></p>
                         <SocialLogin/>
-                        <p className="text-gray-500 dark:text-gray-400 text-center">Already have an account? <Link state={location.state}  to="/login" className="text-gradient font-medium hover:link" >  Login </Link></p>
                     </div>
                 </div>
             </form>

@@ -24,30 +24,32 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className=''>
+            <h2 className='font-extrabold text-[3rem]'>Welcome Back</h2>
+            <p className='text-[1.1rem] my-2'>Login with ZapShift</p>
         <form onSubmit={handleSubmit(handleLogin)}>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                <div className="card-body">
+            <div className="w-full">
+                <div className="">
                     <fieldset className="fieldset">
                         {/* Email */}
                         <label className="label">Email</label>
-                        <input {...register('email', {required: true})} type="email" className="input" placeholder="Email" />
+                        <input {...register('email', {required: true})} type="email" className="input w-full" placeholder="Email" />
                         {
                             errors.email?.type === 'required' && <p className='text-red-500'> Email is required </p>
                         }
 
                         {/* Password */}
                         <label className="label">Password</label>
-                        <input {...register('password', {required: true})} type="password" className="input" placeholder="Password" />
+                        <input {...register('password', {required: true})} type="password" className="input w-full" placeholder="Password" />
                         {
                             errors.password?.type === 'required' && <p className='text-red-500'> Password is required </p>
                         }
 
                         <div><a className="link link-hover">Forgot password?</a></div>
-                        <button className="btn btn-neutral mt-4">Login</button>
+                        <button className="btn btn-primary text-black mt-4">Login</button>
                     </fieldset>
+                    <p className="text-gray-500 dark:text-gray-400 text-center">Don’t have any account? <Link state={location.state}  to="/register" className="text-primary font-medium hover:link"> Register </Link></p>
                     <SocialLogin/>
-                    <p className="text-gray-500 dark:text-gray-400 text-center"> Don’t have an account?<Link state={location.state}  to="/register" className="text-gradient font-medium"> Sign Up </Link></p>
                 </div>
             </div>
         </form>
