@@ -15,6 +15,7 @@ const ZapShiftNavbar = () => {
     const navLinks = <>
         <li><NavLink to="/services" className="nav-link">Services</NavLink></li>
         <li><NavLink to="/coverage" className="nav-link">Coverage</NavLink></li>
+        <li><NavLink to="/send-parcel" className="nav-link">Send Parcel</NavLink></li>
         <li><NavLink to="/about" className="nav-link">About Us</NavLink></li>
         <li><NavLink to="/pricing" className="nav-link">Pricing</NavLink></li>
         <li><NavLink to="/blog" className="nav-link">Blog</NavLink></li>
