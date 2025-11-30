@@ -44,6 +44,8 @@ const ParcelBookingForm = () => {
       }
     }
     console.log('cost', cost);
+    data.cost = cost
+
     Swal.fire({
             title: "Agree with the Cost?",
             text: `You will be charged ${cost} taka!`,
@@ -60,8 +62,8 @@ const ParcelBookingForm = () => {
                     })
 
                 Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    title: "Success!",
+                    text: "Your parcel has been booked successfully.",
                     icon: "success"
                 });
             }
