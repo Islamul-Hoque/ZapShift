@@ -20,10 +20,16 @@ const ZapShiftNavbar = () => {
         <li><NavLink to="/pricing" className="nav-link">Pricing</NavLink></li>
         <li><NavLink to="/blog" className="nav-link">Blog</NavLink></li>
         <li><NavLink to="/contact" className="nav-link">Contact</NavLink></li>
+
+    {
+        user && <>
+            <li><NavLink to="/dashboard/my-parcels">My Parcels</NavLink></li>
+        </>
+    }
     </>
 
     return (
-        <div className="navbar bg-white px-6 md:px-8 shadow-md sticky top-0 z-40">
+        <div className="navbar bg-white px-6 md:px-8 shadow-md sticky top-0 z-5550">
 
             <div className="navbar-start">
                 <div className="dropdown">

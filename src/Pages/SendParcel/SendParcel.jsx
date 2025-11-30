@@ -2,8 +2,12 @@ import React from 'react';
 import { set, useForm, useWatch } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAuth from '../../hooks/useAuth';
 
 const ParcelBookingForm = () => {
+  const { user } = useAuth()
+  const axiosSecure = useAxiosSecure()
   const { register, handleSubmit, control, formState: {errors} } = useForm()
   const servicesCenters = useLoaderData()
   const regionDuplicate = servicesCenters.map(c => c.region)
@@ -19,7 +23,7 @@ const ParcelBookingForm = () => {
   }
 
   const handleSendParcel =(data) => {
-    // console.log(data);
+    console.log(data);
     const isDocument = data.parcelType === 'document';
     const isSameDistrict = data.senderDistrict === data.receiverDistrict
     const parcelWeight = parseFloat(data.parcelWeight)
@@ -50,18 +54,16 @@ const ParcelBookingForm = () => {
             confirmButtonText: "I agree!"
         }).then((result) => {
             if (result.isConfirmed) {
+                axiosSecure.post('/parcels', data)
+                    .then(res => {
+                        console.log('after saving parcel', res.data);
+                    })
 
-                // save the parcel info to the database
-                // axiosSecure.post('/parcels', data)
-                //     .then(res => {
-                //         console.log('after saving parcel', res.data);
-                //     })
-
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
             }
         });
   }
@@ -102,12 +104,12 @@ const ParcelBookingForm = () => {
 
             <label className="label">Sender Name</label>
             <input type="text" {...register('senderName')} 
-            // defaultValue={user?.displayName}
+            defaultValue={user?.displayName}
             className="input w-full" placeholder="Sender Name" />
 
             <label className="label">Sender Email</label>
             <input type="text" {...register('senderEmail')}
-                // defaultValue={user?.email}
+                defaultValue={user?.email || user?.providerData?.[0]?.email} readOnly
                 className="input w-full" placeholder="Sender Email" />
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -175,7 +177,6 @@ const ParcelBookingForm = () => {
             <label className="label mt-4">Receiver Address</label>
             <input type="text" {...register('receiverAddress')} className="input w-full" placeholder="Receiver Address" />
 
-
           </fieldset>
         </div>
 
@@ -187,5 +188,3 @@ const ParcelBookingForm = () => {
 };
 
 export default ParcelBookingForm;
-
-// 62-6 (Recap) Create EndPoint for POST Parcel Data --- ekhan theke shuru korbo, In-Sha-Allah

@@ -16,7 +16,7 @@ const Login = () => {
         console.log(data);
         signInUser(data.email, data.password)
             .then(res => {
-                console.log(res.user);
+                // console.log(res.user);
                 // navigate(location.state?.from?.pathname || '/') 
                 navigate(location?.state || '/')
             })
